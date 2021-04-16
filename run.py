@@ -2,26 +2,26 @@ import os
 import os.path
 import csv
 
-# ["_manufacturerId", "occlusalDiameter", "apicalDiameter", "length", "stlFilePath", "_defaultAbutmentId", "_fixturesystemId", "fixtureName", "gingivaHeight"]
-# 9 개 행
+# input root_dir
 root_dir = input('root_dir : ')
-
 from_mongo_id = root_dir + '_id'
 
+# create csv and row
+f = open('write.csv','w', newline='')
+wr = csv.writer(f)
+wr.writerow(["_manufacturerId", "occlusalDiameter", "apicalDiameter", "length", "stlFilePath", "_defaultAbutmentId", "_fixturesystemId", "fixtureName", "gingivaHeight"])
+
+# export dir  
 for dir_path, dirs, files in os.walk(root_dir):
-    print(f'path : {path}')
+    print(f'path : {dir_path}')
+    system_name = dir_path[len(root_dir) + 1:]
     for file_name in files:
         file_code = file_name[:-3]
-        file_path = path + '\\' + file_code
+        file_path = dir_path + '\\' + file_code
+        wr.writerow([root_dir, '','','',file_path, '',system_name, file_code, 0.0])
+
         print(f'## file : {file_path} ')
 
-# for fdr in file_list :
-    # file_sa = []
-    # file_sa.append(fdr)
-    # print(type(fdr))
- 
-    # file_save.append(file_sa)
- 
-# with open('export.csv','w+',encoding='euc-kr',newline='') as f :
-#     writer = csv.writer(f)
-#     writer.writerows(file_save)  
+
+
+f.close()
