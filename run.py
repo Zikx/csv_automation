@@ -29,14 +29,14 @@ def search_id(val):
 
     return system_id, manufact_id
 
-def search_OAL(file_code, system_name):
-    row_idx = int(csv_OAL.index[(csv_OAL["Code"] == file_code) & (csv_OAL["System"] == system_name)].tolist()[0])
+# def search_OAL(file_code, system_name):
+#     row_idx = int(csv_OAL.index[(csv_OAL["Code"] == file_code) & (csv_OAL["System"] w== system_name)].tolist()[0])
 
-    occlusal = csv_OAL.iloc[row_idx][3]
-    apical = csv_OAL.iloc[row_idx][4]    
-    length = csv_OAL.iloc[row_idx][5]    
+#     occlusal = csv_OAL.iloc[row_idx][3]
+#     apical = csv_OAL.iloc[row_idx][4]    
+#     length = csv_OAL.iloc[row_idx][5]    
 
-    return occlusal, apical, length
+#     return occlusal, apical, length
 
 
 # export dir  
@@ -44,13 +44,17 @@ for dir_path, dirs, files in os.walk(root_dir):
     print(f'path : {dir_path}')
     system_name = dir_path[len(root_dir) + 1:]
     for file_name in files:
+        if not file_name.endswith('.om'):
+            continue
+
         file_code = file_name[:-3]
         file_path = dir_path + '\\' + file_code
         
         system_id, manufact_id = search_id(system_name)
-        occlusal, apical, length = search_OAL(file_code, system_name)
+        # occlusal, apical, length = search_OAL(file_code, system_name)
         print(f'system name : {system_name}')
-        wr.writerow([manufact_id, occlusal, apical, length, file_path, '',system_id, file_code, 0.0])
+        # wr.writerow([manufact_id, occlusal, apical, length, file_path, '',system_id, file_code, 0.0])
+        wr.writerow([manufact_id, '', '', '', file_path, '',system_id, file_code, 0.0])
 
         print(f'## file : {file_path} ')
 
