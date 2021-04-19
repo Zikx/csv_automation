@@ -1,6 +1,6 @@
 # csv data 
 autoDB/
-test/
-test_id.csv
-write.csv
-test.csv
+__pycache__/
+build/
+dist/
+run.spec
