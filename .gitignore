@@ -4,3 +4,4 @@ __pycache__/
 build/
 dist/
 run.spec
+stl_to_om.spec
