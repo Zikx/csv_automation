@@ -16,6 +16,7 @@ def search_id(val):
 
 def search_OAL(file_code, system_name):
     row_idx = int(csv_OAL.index[(csv_OAL["Code"] == file_code) & (csv_OAL["System"] == system_name)].tolist()[0])
+    print(f'row_idx : {row_idx}')
 
     occlusal = csv_OAL.iloc[row_idx][3]
     apical = csv_OAL.iloc[row_idx][4]    
@@ -71,7 +72,7 @@ for dir_path, dirs, files in os.walk(root_dir):
 
         file_code = file_name[:-3]
         file_path = dir_path + '\\' + file_code
-        
+
         system_id, manufact_id = search_id(system_name)
         occlusal, apical, length = search_OAL(file_code, system_name)
         print(f'system name : {system_name}')
